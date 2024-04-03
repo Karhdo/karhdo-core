@@ -5,7 +5,8 @@
     "node": ">=18.0.0"
   },
   "workspaces": [
-    "packages/**/*"
+    "packages/**/*",
+    "services/skeleton"
   ],
   "scripts": {
     "prepare": "husky install",
