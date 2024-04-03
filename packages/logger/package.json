@@ -1,0 +1,20 @@
+{
+  "name": "@karhdo/nestjs-logger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index",
+  "scripts": {
+    "format": "prettier --write \"./src/**/*.ts\"",
+    "lint": "eslint \"./src/**/*.ts\" --config .eslintrc.js",
+    "lint:fix": "eslint \"./src/**/*.ts\" --config .eslintrc.js --fix",
+    "build": "rimraf -rf dist && nest build -p tsconfig.json"
+  },
+  "keywords": [],
+  "author": "",
+  "bin": {},
+  "files": [],
+  "license": "ISC",
+  "dependencies": {
+    "@karhdo/nestjs-core": "1.0.0"
+  }
+}

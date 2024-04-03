@@ -1,0 +1,45 @@
+{
+  "name": "karhdo-core",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "workspaces": [
+    "packages/**/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "dev": "lerna run --parallel dev",
+    "build": "lerna run --stream build",
+    "format": "lerna run --stream format",
+    "lint": "lerna run --stream lint",
+    "lint:fix": "lerna run --stream lint:fix"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.11",
+    "lerna": "^8.1.2",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "yarn lint",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "lerna run --concurrency 1 --stream lint-staged",
+      "pre-commit": "lerna run --concurrency 1 --stream lint-staged"
+    }
+  }
+}
