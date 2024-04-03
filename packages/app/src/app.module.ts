@@ -1,4 +1,11 @@
-import { Module, NestFactory, NestExpressApplication, INestApplication, DynamicModule, ValidationPipe } from '@karhdo/nestjs-core';
+import {
+  Module,
+  NestFactory,
+  DynamicModule,
+  ValidationPipe,
+  INestApplication,
+  NestExpressApplication,
+} from '@karhdo/nestjs-core';
 import * as bodyParser from 'body-parser';
 
 import AppOptions from './app.interface';
@@ -29,7 +36,8 @@ export class AppModule {
 
     await app.listen(3080);
 
-    console.log(`Http service is starting on port 3080`);
+    // eslint-disable-next-line no-console
+    console.log('Http service is starting on port 3080');
   }
 
   private static enableTrustedProxy(app: NestExpressApplication): void {
@@ -52,9 +60,11 @@ export class AppModule {
 
     this.setupCors(app);
 
-    app.useGlobalPipes(new ValidationPipe({
-      transform: true
-    }));
+    app.useGlobalPipes(
+      new ValidationPipe({
+        transform: true,
+      }),
+    );
 
     return app;
   }
@@ -66,7 +76,7 @@ export class AppModule {
       imports: this.buildImportModule(),
       controllers: this.buildController(),
       providers: [],
-      exports: []
+      exports: [],
     };
   }
 
@@ -81,9 +91,6 @@ export class AppModule {
 
     const defaultModules = [];
 
-    return [
-      ...defaultModules,
-      ...importedModules
-    ];
+    return [...defaultModules, ...importedModules];
   }
 }

@@ -1,4 +1,4 @@
-import { Module } from '@karhdo/nestjs-core'
+import { Module } from '@karhdo/nestjs-core';
 
 @Module({
   imports: [],

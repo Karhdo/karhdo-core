@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index",
   "scripts": {
+    "dev": "nest start --watch -p tsconfig.json",
     "format": "prettier --write \"./src/**/*.ts\"",
     "lint": "eslint \"./src/**/*.ts\" --config .eslintrc.js",
     "lint:fix": "eslint \"./src/**/*.ts\" --config .eslintrc.js --fix",
