@@ -17,6 +17,7 @@
     "lint:fix": "lerna run --stream lint:fix"
   },
   "devDependencies": {
+    "@types/node": "^20.12.4",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",
     "eslint": "^8.57.0",
@@ -25,11 +26,12 @@
     "husky": "^9.0.11",
     "lerna": "^8.1.2",
     "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2"
   },
   "lint-staged": {
-    "*.{js,ts}": [
-      "yarn lint",
+    "*.ts": [
+      "eslint --config .eslintrc.js --fix",
       "git add"
     ],
     "*.{json,md}": [

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   Module,
   NestFactory,
@@ -6,6 +7,7 @@ import {
   INestApplication,
   NestExpressApplication,
 } from '@karhdo/nestjs-core';
+import { LoggerModule, LoggerService } from '@karhdo/nestjs-logger';
 import * as bodyParser from 'body-parser';
 
 import AppOptions from './app.interface';
@@ -34,10 +36,13 @@ export class AppModule {
   private static async listen(): Promise<void> {
     const app = this.getInstance();
 
-    await app.listen(3080);
+    const logger = app.get(LoggerService);
 
-    // eslint-disable-next-line no-console
-    console.log('Http service is starting on port 3080');
+    const port = 3080;
+
+    await app.listen(port);
+
+    logger.info(`Http service is starting on port ${port}`);
   }
 
   private static enableTrustedProxy(app: NestExpressApplication): void {
@@ -89,7 +94,7 @@ export class AppModule {
   private static buildImportModule() {
     const { imports: importedModules = [] } = this.options;
 
-    const defaultModules = [];
+    const defaultModules = [LoggerModule];
 
     return [...defaultModules, ...importedModules];
   }
