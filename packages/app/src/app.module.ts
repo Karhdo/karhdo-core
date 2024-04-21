@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+import * as bodyParser from 'body-parser';
+
 import {
   Module,
   NestFactory,
@@ -7,8 +9,8 @@ import {
   INestApplication,
   NestExpressApplication,
 } from '@karhdo/nestjs-core';
+import { ConfigModule, AppConfig } from '@karhdo/nestjs-config';
 import { LoggerModule, LoggerService } from '@karhdo/nestjs-logger';
-import * as bodyParser from 'body-parser';
 
 import AppOptions from './app.interface';
 
@@ -37,8 +39,7 @@ export class AppModule {
     const app = this.getInstance();
 
     const logger = app.get(LoggerService);
-
-    const port = 3080;
+    const { port } = app.get(AppConfig);
 
     await app.listen(port);
 
@@ -96,6 +97,6 @@ export class AppModule {
 
     const defaultModules = [LoggerModule];
 
-    return [...defaultModules, ...importedModules];
+    return [ConfigModule.forRootAsync(), ...defaultModules, ...importedModules];
   }
 }
