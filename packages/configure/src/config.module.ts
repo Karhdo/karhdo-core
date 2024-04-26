@@ -11,7 +11,14 @@ import flat from 'flat';
 import { validateSync, ValidatorOptions } from 'class-validator';
 import { ClassConstructor, classToPlain, plainToClass } from 'class-transformer';
 
-import { Provider, DynamicModule, ObjectLiteral, forEachDeep } from '@karhdo/nestjs-core';
+import {
+  Provider,
+  DynamicModule,
+  ObjectLiteral,
+  forEachDeep,
+  getConfigErrorMessage,
+  displayConfigErrorMessage,
+} from '@karhdo/nestjs-core';
 
 import { fileLoader } from './loaders';
 import { EnvironmentConfig } from './schemas';
@@ -154,10 +161,12 @@ export class ConfigModule {
       ...validationOptions,
     });
 
-    if (schemaErrors.length > 0) {
-      console.log(schemaErrors);
+    const errors = getConfigErrorMessage(schemaErrors);
 
-      throw new Error('Schema validation error');
+    if (errors.length > 0) {
+      const errorMessage = displayConfigErrorMessage(errors, { stopAtFirstError: true });
+
+      throw new Error(errorMessage);
     }
 
     return config;
