@@ -1,7 +1,9 @@
-import { Type, Expose } from 'class-transformer';
-import { ValidateNested } from 'class-validator';
+import { Type, Expose, plainToInstance } from 'class-transformer';
+import { ValidateNested, IsOptional } from 'class-validator';
+import { NestedObjectTransform } from '@karhdo/nestjs-core';
 
 import { AppConfig } from './app.schema';
+import { Database, DatabaseConfig } from './database.schema';
 
 export class EnvironmentConfig {
   @Type(() => AppConfig)
@@ -12,4 +14,10 @@ export class EnvironmentConfig {
   constructor(config?: Partial<EnvironmentConfig>) {
     Object.assign(this, config);
   }
+
+  @IsOptional()
+  @NestedObjectTransform(Database, ({ value }) => {
+    return plainToInstance(DatabaseConfig, value);
+  })
+  public readonly database: DatabaseConfig;
 }

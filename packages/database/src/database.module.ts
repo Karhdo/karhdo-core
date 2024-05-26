@@ -37,7 +37,7 @@ export class DatabaseModule {
         useFactory: (databaseConfig: DatabaseConfig) => get(databaseConfig, connectionName),
       },
       {
-        inject: [databaseModuleOptionToken, LoggerModule],
+        inject: [databaseModuleOptionToken, LoggerService],
         provide: getConnectionToken(connectionName),
         useFactory: async (database: Database, logger: LoggerService) => {
           const connectionString = this.getConnectionString(database);

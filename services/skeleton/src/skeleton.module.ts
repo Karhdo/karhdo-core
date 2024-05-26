@@ -1,7 +1,13 @@
 import { Module } from '@karhdo/nestjs-core';
+import { DatabaseModule } from '@karhdo/nestjs-database';
 
 @Module({
-  imports: [],
+  imports: [
+    DatabaseModule.forRootAsync({
+      name: 'karhdo_postgres',
+      entities: [],
+    }),
+  ],
   controllers: [],
   providers: [],
   exports: [],
