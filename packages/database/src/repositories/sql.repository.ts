@@ -1,6 +1,6 @@
 import { Model } from 'sequelize-typescript';
-import { NonNullFindOptions, BulkCreateOptions } from 'sequelize';
 import { MakeNullishOptional } from 'sequelize/types/utils';
+import { NonNullFindOptions, BulkCreateOptions } from 'sequelize';
 
 import { IRepository } from '../database.interface';
 import { Table, FindOptions, Filter } from '../database.type';
@@ -57,7 +57,7 @@ export class SQLRepository<T extends Model> implements IRepository<T> {
     return this.findOne({ where });
   }
 
-  public async updateById(id: string | number, data: Partial<T>): Promise<T> {
+  public async updateById(id: number | any, data: Partial<T>): Promise<T> {
     return this.updateOne({ id }, data);
   }
 
@@ -65,8 +65,11 @@ export class SQLRepository<T extends Model> implements IRepository<T> {
     return this.table.destroy<T>({ where });
   }
 
-  public async deleteOne(options: FindOptions<T>): Promise<T> {
-    const row = await this.table.findOne<T>(options);
+  public async deleteOne(filter: Filter<T>, options?: FindOptions<T>): Promise<T> {
+    const row = await this.table.findOne<T>({
+      where: filter,
+      ...options,
+    });
 
     if (row) {
       await row.destroy();
@@ -75,7 +78,7 @@ export class SQLRepository<T extends Model> implements IRepository<T> {
     return row;
   }
 
-  public async deleteById(id: string | number): Promise<T> {
+  public async deleteById(id: number | any): Promise<T> {
     return this.deleteOne({ id });
   }
 

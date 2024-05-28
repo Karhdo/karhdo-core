@@ -17,13 +17,13 @@ export interface IRepository<T> {
 
   updateOne(filter: Filter<T>, data: Partial<T>): Promise<T>;
 
-  updateById(id: string | number, data: Partial<T>): Promise<T>;
+  updateById(id: number | any, data: Partial<T>): Promise<T>;
 
   delete(filter: Filter<T>): Promise<number>;
 
-  deleteOne(filter: FindOptions<T>): Promise<T>;
+  deleteOne(filter: Filter<T>, options?: FindOptions<T>): Promise<T>;
 
-  deleteById(id: string | number): Promise<T>;
+  deleteById(id: number | any): Promise<T>;
 
   insert(data: Partial<T>): Promise<T>;
 
