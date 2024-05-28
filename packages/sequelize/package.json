@@ -1,0 +1,28 @@
+{
+  "name": "@karhdo/nestjs-sequelize",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index",
+  "scripts": {
+    "format": "prettier --write \"./src/**/*.ts\"",
+    "lint": "eslint \"./src/**/*.ts\" --config .eslintrc.js",
+    "lint:fix": "eslint \"./src/**/*.ts\" --config .eslintrc.js --fix",
+    "build": "rimraf -rf dist && nest build -p tsconfig.json"
+  },
+  "keywords": [],
+  "author": "",
+  "bin": {},
+  "files": [],
+  "license": "ISC",
+  "dependencies": {
+    "@karhdo/nestjs-config": "1.0.0",
+    "@karhdo/nestjs-logger": "1.0.0",
+    "@nestjs/sequelize": "^10.0.1",
+    "pg": "^8.11.5",
+    "sequelize": "^6.37.3",
+    "sequelize-typescript": "^2.1.6"
+  },
+  "devDependencies": {
+    "@types/sequelize": "^4.28.20"
+  }
+}

@@ -3,6 +3,7 @@ import { ValidateNested, IsOptional } from 'class-validator';
 import { NestedObjectTransform } from '@karhdo/nestjs-core';
 
 import { AppConfig } from './app.schema';
+import { Sequelize, SequelizeConfig } from './sequelize.schema';
 import { Database, DatabaseConfig } from './database.schema';
 
 export class EnvironmentConfig {
@@ -20,4 +21,10 @@ export class EnvironmentConfig {
     return plainToInstance(DatabaseConfig, value);
   })
   public readonly database: DatabaseConfig;
+
+  @IsOptional()
+  @NestedObjectTransform(Sequelize, ({ value }) => {
+    return plainToInstance(SequelizeConfig, value);
+  })
+  public readonly sequelize: SequelizeConfig;
 }
