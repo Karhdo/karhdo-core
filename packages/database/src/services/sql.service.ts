@@ -48,18 +48,14 @@ export class SQLService<T extends Model> {
     return this.repository.deleteOne(filter);
   }
 
-  public async insert(data: MakeNullishOptional<T['_creationAttributes']>): Promise<T> {
-    return this.repository.insert(data);
+  public async create(data: MakeNullishOptional<T['_creationAttributes']>): Promise<T> {
+    return this.repository.create(data);
   }
 
-  public async insertMany(
+  public async createMany(
     data: MakeNullishOptional<T['_creationAttributes']>[],
     options?: BulkCreateOptions,
   ): Promise<T[]> {
-    return this.repository.insertMany(data, options);
-  }
-
-  public async count(filter: WhereOptions<T>): Promise<number> {
-    return this.repository.count(filter);
+    return this.repository.createMany(data, options);
   }
 }

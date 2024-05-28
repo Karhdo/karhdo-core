@@ -1,9 +1,9 @@
 import { LoggerModule, LoggerService } from '@karhdo/nestjs-logger';
-import { ConfigModule, Database, DatabaseConfig, SQL_DATABASE_TYPE } from '@karhdo/nestjs-config';
 import { Module, DynamicModule, Provider } from '@karhdo/nestjs-core';
+import { ConfigModule, Database, DatabaseConfig, SQL_DATABASE_TYPE } from '@karhdo/nestjs-config';
 
 import { get } from 'lodash';
-import { Sequelize } from 'sequelize-typescript';
+import { ModelCtor, Sequelize } from 'sequelize-typescript';
 import { defer, lastValueFrom, retryWhen, scan, delay } from 'rxjs';
 
 import { DATABASE_FACTORY } from './database.enum';
@@ -23,6 +23,24 @@ export class DatabaseModule {
       exports: providers,
       global: true,
     };
+  }
+
+  private static registerEntities({ entities, name }: Pick<DatabaseModuleOption, 'entities' | 'name'>): Provider[] {
+    const providers: Provider[] = [];
+
+    for (const entity of entities) {
+      providers.push({
+        inject: [getConnectionToken(name)],
+        provide: entity.name,
+        useFactory: (connection: Sequelize) => {
+          if (connection instanceof Sequelize) {
+            return connection.addModels([entity as ModelCtor]);
+          }
+        },
+      });
+    }
+
+    return providers;
   }
 
   private static createProviders(options: DatabaseModuleOption): Provider[] {
@@ -72,6 +90,7 @@ export class DatabaseModule {
           );
         },
       },
+      ...this.registerEntities(options),
     ];
   }
 

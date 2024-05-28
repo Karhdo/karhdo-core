@@ -41,10 +41,6 @@ export class SQLRepository<T extends Model> implements IRepository<T> {
     });
   }
 
-  public async count(where: Filter<T>): Promise<number> {
-    return this.table.count<T>({ where });
-  }
-
   public async update(where: Filter<T>, data: Partial<T>): Promise<T[]> {
     await this.table.update<T>(data, { where });
 
@@ -82,11 +78,11 @@ export class SQLRepository<T extends Model> implements IRepository<T> {
     return this.deleteOne({ id });
   }
 
-  public async insert(data: MakeNullishOptional<T['_creationAttributes']>): Promise<T> {
+  public async create(data: MakeNullishOptional<T['_creationAttributes']>): Promise<T> {
     return this.table.create(data);
   }
 
-  public async insertMany(
+  public async createMany(
     data: MakeNullishOptional<T['_creationAttributes']>[],
     options?: BulkCreateOptions,
   ): Promise<T[]> {

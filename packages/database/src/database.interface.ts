@@ -11,8 +11,6 @@ export interface IRepository<T> {
 
   findByIds(ids: Array<string | number>): Promise<T[]>;
 
-  count(filter: Filter<T>): Promise<number>;
-
   update(filter: Filter<T>, data: Partial<T>): Promise<T[]>;
 
   updateOne(filter: Filter<T>, data: Partial<T>): Promise<T>;
@@ -25,9 +23,9 @@ export interface IRepository<T> {
 
   deleteById(id: number | any): Promise<T>;
 
-  insert(data: Partial<T>): Promise<T>;
+  create(data: Partial<T>): Promise<T>;
 
-  insertMany(data: Partial<T>[]): Promise<T[]>;
+  createMany(data: Partial<T>[]): Promise<T[]>;
 }
 
 export interface SQLOptions<T> extends FindOptions<T> {
