@@ -15,7 +15,6 @@
   "files": [],
   "license": "ISC",
   "dependencies": {
-    "@karhdo/nestjs-config": "1.0.0",
-    "@karhdo/nestjs-logger": "1.0.0"
+    "@karhdo/nestjs-common": "1.0.0"
   }
 }

@@ -8,7 +8,11 @@
     "format": "prettier --write \"./src/**/*.ts\"",
     "lint": "eslint \"./src/**/*.ts\" --config .eslintrc.js",
     "lint:fix": "eslint \"./src/**/*.ts\" --config .eslintrc.js --fix",
-    "build": "rimraf -rf dist && nest build -p tsconfig.json"
+    "build": "rimraf -rf dist && nest build -p tsconfig.json",
+    "migration:generate": "npx sequelize-cli migration:generate",
+    "migration:run": "npx sequelize-cli db:migrate",
+    "migration:undo": "npx sequelize-cli db:migrate:undo",
+    "migration:undo:all": "npx sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +20,7 @@
   "files": [],
   "license": "ISC",
   "dependencies": {
-    "@karhdo/nestjs-app": "1.0.0"
+    "@karhdo/nestjs-app": "1.0.0",
+    "@karhdo/nestjs-database": "1.0.0"
   }
 }
