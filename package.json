@@ -14,7 +14,8 @@
     "build": "lerna run --stream build",
     "format": "lerna run --stream format",
     "lint": "lerna run --stream lint",
-    "lint:fix": "lerna run --stream lint:fix"
+    "lint:fix": "lerna run --stream lint:fix",
+    "npm:publish": "lerna publish patch --exact --yes"
   },
   "devDependencies": {
     "@types/node": "^20.12.4",
