@@ -1,6 +1,6 @@
 {
   "name": "@karhdo/nestjs-http",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index",
   "scripts": {
@@ -15,7 +15,7 @@
   "files": [],
   "license": "ISC",
   "dependencies": {
-    "@karhdo/nestjs-common": "1.0.0",
+    "@karhdo/nestjs-common": "1.0.1",
     "axios": "^1.7.2",
     "axios-retry": "^4.3.0"
   }

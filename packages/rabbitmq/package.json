@@ -1,6 +1,6 @@
 {
   "name": "@karhdo/nestjs-rabbitmq",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index",
   "scripts": {
@@ -14,7 +14,7 @@
   "bin": {},
   "license": "ISC",
   "dependencies": {
-    "@karhdo/nestjs-common": "1.0.0",
+    "@karhdo/nestjs-common": "1.0.1",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3"
   },
