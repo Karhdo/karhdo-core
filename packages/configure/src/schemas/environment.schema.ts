@@ -3,6 +3,7 @@ import { ValidateNested, IsOptional } from 'class-validator';
 import { NestedObjectTransform } from '@karhdo/nestjs-core';
 
 import { AppConfig } from './app.schema';
+import { RabbitMQConfig } from './rabbitmq.schema';
 import { Database, DatabaseConfig } from './database.schema';
 
 export class EnvironmentConfig {
@@ -14,6 +15,11 @@ export class EnvironmentConfig {
   constructor(config?: Partial<EnvironmentConfig>) {
     Object.assign(this, config);
   }
+
+  @Type(() => RabbitMQConfig)
+  @Expose()
+  @ValidateNested()
+  public readonly rabbitmq: RabbitMQConfig;
 
   @IsOptional()
   @NestedObjectTransform(Database, ({ value }) => {

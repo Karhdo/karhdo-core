@@ -1,18 +1,19 @@
 {
-    "name": "@karhdo/nestjs-common",
-    "version": "1.0.0",
-    "description": "",
-    "main": "dist/index",
-    "scripts": {
-      "build": "rimraf -rf dist && nest build -p tsconfig.json"
-    },
-    "keywords": [],
-    "author": "",
-    "bin": {},
-    "files": [],
-    "license": "ISC",
-    "dependencies": {
-        "@karhdo/nestjs-config": "1.0.0",
-        "@karhdo/nestjs-logger": "1.0.0"
-    }
+  "name": "@karhdo/nestjs-common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index",
+  "scripts": {
+    "build": "rimraf -rf dist && nest build -p tsconfig.json"
+  },
+  "keywords": [],
+  "author": "",
+  "bin": {},
+  "files": [],
+  "license": "ISC",
+  "dependencies": {
+    "@karhdo/nestjs-config": "1.0.0",
+    "@karhdo/nestjs-logger": "1.0.0",
+    "@karhdo/nestjs-registry": "1.0.0"
+  }
 }

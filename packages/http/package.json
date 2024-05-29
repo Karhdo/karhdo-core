@@ -1,0 +1,22 @@
+{
+  "name": "@karhdo/nestjs-http",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index",
+  "scripts": {
+    "format": "prettier --write \"./src/**/*.ts\"",
+    "lint": "eslint \"./src/**/*.ts\" --config .eslintrc.js",
+    "lint:fix": "eslint \"./src/**/*.ts\" --config .eslintrc.js --fix",
+    "build": "rimraf -rf dist && nest build -p tsconfig.json"
+  },
+  "keywords": [],
+  "author": "",
+  "bin": {},
+  "files": [],
+  "license": "ISC",
+  "dependencies": {
+    "@karhdo/nestjs-common": "1.0.0",
+    "axios": "^1.7.2",
+    "axios-retry": "^4.3.0"
+  }
+}
