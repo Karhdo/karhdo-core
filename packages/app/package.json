@@ -1,6 +1,6 @@
 {
   "name": "@karhdo/nestjs-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/index",
   "scripts": {
@@ -15,6 +15,6 @@
   "files": [],
   "license": "ISC",
   "dependencies": {
-    "@karhdo/nestjs-common": "1.0.1"
+    "@karhdo/nestjs-common": "1.0.2"
   }
 }
