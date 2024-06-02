@@ -1,6 +1,6 @@
 {
   "name": "@karhdo/nestjs-database",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index",
   "scripts": {
@@ -14,7 +14,7 @@
   "bin": {},
   "license": "ISC",
   "dependencies": {
-    "@karhdo/nestjs-common": "1.0.2",
+    "@karhdo/nestjs-common": "1.0.3",
     "@nestjs/sequelize": "^10.0.1",
     "pg": "^8.11.5",
     "sequelize": "^6.37.3",

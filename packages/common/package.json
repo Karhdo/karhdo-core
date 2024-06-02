@@ -1,6 +1,6 @@
 {
   "name": "@karhdo/nestjs-common",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index",
   "scripts": {
@@ -11,8 +11,8 @@
   "bin": {},
   "license": "ISC",
   "dependencies": {
-    "@karhdo/nestjs-config": "1.0.2",
-    "@karhdo/nestjs-logger": "1.0.2",
-    "@karhdo/nestjs-registry": "1.0.2"
+    "@karhdo/nestjs-config": "1.0.3",
+    "@karhdo/nestjs-logger": "1.0.3",
+    "@karhdo/nestjs-registry": "1.0.3"
   }
 }
