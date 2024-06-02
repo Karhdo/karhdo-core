@@ -9,7 +9,6 @@
   "keywords": [],
   "author": "",
   "bin": {},
-  "files": [],
   "license": "ISC",
   "dependencies": {
     "@karhdo/nestjs-config": "1.0.2",

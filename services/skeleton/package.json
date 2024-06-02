@@ -17,7 +17,6 @@
   "keywords": [],
   "author": "",
   "bin": {},
-  "files": [],
   "license": "ISC",
   "dependencies": {
     "@karhdo/nestjs-app": "1.0.2",
