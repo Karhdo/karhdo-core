@@ -1,6 +1,6 @@
 {
   "name": "@karhdo/skeleton-service",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/index",
   "scripts": {
@@ -20,6 +20,6 @@
   "license": "ISC",
   "dependencies": {
     "@karhdo/nestjs-app": "1.0.5",
-    "@karhdo/nestjs-database": "1.0.5"
+    "@karhdo/nestjs-database": "1.0.6"
   }
 }
