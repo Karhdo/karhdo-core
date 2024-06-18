@@ -58,4 +58,12 @@ export class SQLService<T extends Model> {
   ): Promise<T[]> {
     return this.repository.createMany(data, options);
   }
+
+  public async upsert(data: MakeNullishOptional<T['_creationAttributes']>): Promise<[T, boolean]> {
+    return this.repository.upsert(data);
+  }
+
+  public async upsertMany(data: MakeNullishOptional<T['_creationAttributes']>[]): Promise<[T[], number[]]> {
+    return this.repository.upsertMany(data);
+  }
 }
