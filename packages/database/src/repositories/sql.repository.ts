@@ -89,18 +89,12 @@ export class SQLRepository<T extends Model> implements IRepository<T> {
     return this.table.bulkCreate<T>(data, options);
   }
 
-  public async upsert(data: MakeNullishOptional<T['_creationAttributes']>): Promise<[T, boolean]> {
-    const [instance, wasCreated] = await this.table.upsert<T>(data, { returning: true });
-
-    return [instance, wasCreated];
-  }
-
-  public async upsertMany(data: MakeNullishOptional<T['_creationAttributes']>[]): Promise<[T[], number[]]> {
+  public async upsert(data: MakeNullishOptional<T['_creationAttributes']>[]): Promise<[T[], number[]]> {
     const instances = [];
     const wasCreated = [];
 
     for (const item of data) {
-      const [instance, created] = await this.upsert(item);
+      const [instance, created] = await this.table.upsert<T>(item, { returning: true });
       instances.push(instance);
       wasCreated.push(created);
     }
