@@ -1,6 +1,6 @@
 import { Model } from 'sequelize-typescript';
 import { MakeNullishOptional } from 'sequelize/types/utils';
-import { NonNullFindOptions, BulkCreateOptions } from 'sequelize';
+import { NonNullFindOptions, BulkCreateOptions, UpsertOptions } from 'sequelize';
 
 import { IRepository } from '../database.interface';
 import { Table, FindOptions, Filter } from '../database.type';
@@ -89,16 +89,24 @@ export class SQLRepository<T extends Model> implements IRepository<T> {
     return this.table.bulkCreate<T>(data, options);
   }
 
-  public async upsert(data: MakeNullishOptional<T['_creationAttributes']>[]): Promise<[T[], number[]]> {
-    const instances = [];
-    const wasCreated = [];
+  public async upsert(
+    data: MakeNullishOptional<T['_creationAttributes']>[],
+    upsertOptions?: UpsertOptions,
+  ): Promise<[T[], boolean[] | null]> {
+    const upsertPromises = data.map((item) => this.table.upsert<T>(item, upsertOptions));
 
-    for (const item of data) {
-      const [instance, created] = await this.table.upsert<T>(item, { returning: true });
-      instances.push(instance);
-      wasCreated.push(created);
+    const results = await Promise.all(upsertPromises);
+
+    // Check if 'returning' is explicitly set to false
+    if (upsertOptions?.returning === false) {
+      // Handle the case where 'returning' is false - return empty or null values
+      return [[], null];
+    } else {
+      // Process results as before
+      const instances = results.map((result) => result[0]);
+      const wasCreated = results.map((result) => result[1]);
+
+      return [instances, wasCreated];
     }
-
-    return [instances, wasCreated];
   }
 }

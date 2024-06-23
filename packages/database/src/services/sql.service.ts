@@ -1,6 +1,6 @@
 import { Model } from 'sequelize-typescript';
 import { MakeNullishOptional } from 'sequelize/types/utils';
-import { WhereOptions, NonNullFindOptions, BulkCreateOptions } from 'sequelize';
+import { WhereOptions, NonNullFindOptions, BulkCreateOptions, UpsertOptions } from 'sequelize';
 
 import { SQLRepository } from '../repositories';
 import { FindOptions } from '../database.type';
@@ -59,7 +59,10 @@ export class SQLService<T extends Model> {
     return this.repository.createMany(data, options);
   }
 
-  public async upsert(data: MakeNullishOptional<T['_creationAttributes']>[]): Promise<[T[], number[]]> {
-    return this.repository.upsert(data);
+  public async upsert(
+    data: MakeNullishOptional<T['_creationAttributes']>[],
+    upsertOptions?: UpsertOptions,
+  ): Promise<[T[], boolean[] | null]> {
+    return this.repository.upsert(data, upsertOptions);
   }
 }
