@@ -280,7 +280,7 @@ export class AmqpConnection {
     } = options;
 
     if (JSON.parse(createQueueIfNotExists.toString())) {
-      const options = Object.assign({ arguments: { 'x-queue-type': 'quorum' } }, queueOptions);
+      const options = Object.assign({ arguments: { 'x-queue-type': 'classic' } }, queueOptions);
 
       await channel.assertQueue(queueName, options);
     }
