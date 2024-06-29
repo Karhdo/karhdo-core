@@ -54,7 +54,7 @@ export class SQLService<T extends Model> {
 
   public async createMany(
     data: MakeNullishOptional<T['_creationAttributes']>[],
-    options?: BulkCreateOptions,
+    options?: BulkCreateOptions<T>,
   ): Promise<T[]> {
     return this.repository.createMany(data, options);
   }

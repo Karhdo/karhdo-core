@@ -84,7 +84,7 @@ export class SQLRepository<T extends Model> implements IRepository<T> {
 
   public async createMany(
     data: MakeNullishOptional<T['_creationAttributes']>[],
-    options?: BulkCreateOptions,
+    options?: BulkCreateOptions<T>,
   ): Promise<T[]> {
     return this.table.bulkCreate<T>(data, options);
   }
