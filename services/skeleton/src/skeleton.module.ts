@@ -1,16 +1,19 @@
-import { Module } from '@karhdo/nestjs-core';
-import { DatabaseModule } from '@karhdo/nestjs-database';
+import type { RedisClientOptions } from 'redis';
+import { redisStore } from 'cache-manager-redis-yet';
+import { CacheModule } from '@nestjs/cache-manager';
 
-import { User } from './models';
+import { Module } from '@karhdo/nestjs-core';
+
 import { services } from './services';
 import { controllers } from './controllers';
 import { repositories } from './repositories';
 
 @Module({
   imports: [
-    DatabaseModule.forRootAsync({
-      name: 'karhdo_postgres',
-      entities: [User],
+    CacheModule.register<RedisClientOptions>({
+      isGlobal: true,
+      store: redisStore,
+      url: 'redis://localhost:6379',
     }),
   ],
   controllers,
