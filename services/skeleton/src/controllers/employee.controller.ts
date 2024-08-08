@@ -1,18 +1,19 @@
 import { Get, Controller, Inject, UseInterceptors } from '@karhdo/nestjs-core';
 
-import { CacheInterceptor, CacheTTL, Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
+import { CacheInterceptor, Cache, CACHE_MANAGER } from '@karhdo/cache-manager';
 
-import { getEmployees, getSeniorEmployees } from '../utils';
+import { EmployeeService } from '../services';
 
 @Controller('employees')
 export class EmployeeController {
+  constructor(private readonly employeeService: EmployeeService) {}
+
   @Inject(CACHE_MANAGER) private cacheManager: Cache;
 
-  @CacheTTL(10000)
-  @UseInterceptors(CacheInterceptor)
+  // @UseInterceptors(CacheInterceptor)
   @Get()
   find() {
-    return getEmployees();
+    return this.employeeService.find();
   }
 
   @Get('seniors')
@@ -23,7 +24,7 @@ export class EmployeeController {
       return cachedSeniors;
     }
 
-    const seniors = await getSeniorEmployees();
+    const seniors = await this.employeeService.findSenior();
 
     this.cacheManager.set('all-seniors', seniors, 10000);
 

@@ -10,7 +10,7 @@ export default function getEmployees() {
         {
           id: 2,
           name: 'NguyenNP',
-          position: 'Senior Fullstack Engineer',
+          position: 'Engineer',
         },
         {
           id: 3,
