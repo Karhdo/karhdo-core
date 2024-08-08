@@ -1,6 +1,8 @@
 import type { RedisClientOptions } from 'redis';
 import { redisStore } from 'cache-manager-redis-yet';
-import { CacheModule } from '@nestjs/cache-manager';
+
+import { CacheModule } from '@karhdo/cache-manager';
+import { CacheConfig } from '@karhdo/nestjs-config';
 
 import { Module } from '@karhdo/nestjs-core';
 
@@ -10,11 +12,17 @@ import { repositories } from './repositories';
 
 @Module({
   imports: [
-    CacheModule.register<RedisClientOptions>({
-      isGlobal: true,
-      store: redisStore,
-      url: 'redis://localhost:6379',
-    }),
+    // CacheModule.registerAsync<RedisClientOptions>({
+    //   inject: [CacheConfig],
+    //   useFactory: (cacheConfig: CacheConfig) => ({
+    //     store: redisStore,
+    //     ttl: cacheConfig.ttl,
+    //     username: cacheConfig.username,
+    //     password: cacheConfig.password,
+    //     url: `redis://${cacheConfig.host}:${cacheConfig.port}`,
+    //   }),
+    // }),
+    CacheModule.registerAsync(),
   ],
   controllers,
   providers: [...services, ...repositories],

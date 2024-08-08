@@ -3,6 +3,7 @@ import { ValidateNested, IsOptional } from 'class-validator';
 import { NestedObjectTransform, NestedObjectValidator } from '@karhdo/nestjs-core';
 
 import { AppConfig } from './app.schema';
+import { CacheConfig } from './cache.schema';
 import { RabbitMQConfig } from './rabbitmq.schema';
 import { AxiosConfig, HttpConfig } from './http.schema';
 import { Database, DatabaseConfig } from './database.schema';
@@ -16,6 +17,11 @@ export class EnvironmentConfig {
   @Expose()
   @ValidateNested()
   public readonly app: AppConfig;
+
+  @Type(() => CacheConfig)
+  @Expose()
+  @ValidateNested()
+  public readonly cache: CacheConfig;
 
   @IsOptional()
   @NestedObjectValidator(AxiosConfig)

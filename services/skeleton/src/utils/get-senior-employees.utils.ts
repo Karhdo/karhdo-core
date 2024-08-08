@@ -28,6 +28,6 @@ export default function getEmployees() {
           position: 'Senior Fullstack Engineer',
         },
       ]);
-    }, 5000);
+    }, 1000);
   });
 }

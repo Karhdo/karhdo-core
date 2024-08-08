@@ -1,6 +1,6 @@
 import { Get, Controller, Inject, UseInterceptors } from '@karhdo/nestjs-core';
 
-import { CacheInterceptor, CacheTTL, Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
+import { CacheInterceptor, Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 
 import { getEmployees, getSeniorEmployees } from '../utils';
 
@@ -8,7 +8,6 @@ import { getEmployees, getSeniorEmployees } from '../utils';
 export class EmployeeController {
   @Inject(CACHE_MANAGER) private cacheManager: Cache;
 
-  @CacheTTL(10000)
   @UseInterceptors(CacheInterceptor)
   @Get()
   find() {
